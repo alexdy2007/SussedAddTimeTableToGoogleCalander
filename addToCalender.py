@@ -83,6 +83,15 @@ def buildEventJson(classObject):
     return event
 
 def removeDuplicates(service, events_to_add):
+
+    def try_parsing_date(text):
+        for fmt in ('%Y-%m-%dT%H:%M:%S', '%Y-%m-%dT%H:', '%Y-%m-%dT%H:%M'):
+            try:
+                return datetime.datetime.strptime(text, fmt)
+            except ValueError:
+                pass
+        raise ValueError('no valid date format found')
+
     minTime = (datetime.datetime.now() - datetime.timedelta(days=7)).isoformat('T')[:-7] + "Z"
     eventsResult = service.events().list(
         calendarId='primary', timeMin=minTime, maxResults=100, singleEvents=True,
@@ -100,10 +109,11 @@ def removeDuplicates(service, events_to_add):
     for event_to_add in events_to_add:
         for current_event in current_event_list:
             if event_to_add["summary"] in (current_event[1]):
-                event_to_add_start_date = datetime.datetime.strptime(event_to_add["start"]["dateTime"], "%Y-%m-%dT%H:%M:%S")
-                current_event_start_date = datetime.datetime.strptime(current_event[0][:-6], "%Y-%m-%dT%H:%M:%S")
+                event_to_add_start_date = try_parsing_date(event_to_add["start"]["dateTime"])
+                current_event_start_date = try_parsing_date(current_event[0][:-6])
                 if event_to_add_start_date == current_event_start_date:
-                    event_to_add_updated_list.remove(event_to_add)
+                    if event_to_add in event_to_add_updated_list:
+                        event_to_add_updated_list.remove(event_to_add)
     return event_to_add_updated_list
 
 
