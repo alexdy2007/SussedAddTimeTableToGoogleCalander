@@ -82,6 +82,9 @@ class TimeTablePage():
     def scrape_classes_data(self, weeks):
         for i in range(weeks):
             number_of_classes = len(self.driver.find_elements_by_css_selector('table.basic tbody tr'))
+            if number_of_classes==0:
+                print("no Classes Found")
+                return []
             for class_number in range(number_of_classes):
                 class_finder_string = "//table[contains(@class,'basic')]/tbody/tr[{0}]/td".format(str(class_number + 1))
                 table_rows = self.driver.find_elements_by_xpath(class_finder_string)
