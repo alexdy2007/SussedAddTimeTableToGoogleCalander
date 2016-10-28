@@ -3,8 +3,9 @@ from addToCalender import addTocalendar
 
 def run():
     print("Starting")
+    getNumberOfWeekInAdvance = 2
     try:
-        timeTableClasses = getClasses(2)
+        timeTableClasses = getClasses(getNumberOfWeekInAdvance)
     except Exception as e:
         print(format("A error has occured in retriving classes : {}", str(e)))
     try:

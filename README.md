@@ -31,3 +31,4 @@ In file sussedCredetials.py enter your sussed username and password
 to run bin/run.py
 if not loading usually due to incorrect driver for chome version. default v52. to change in getClasses file and change to point to correct driver. webdriver.Chrome(dir_path + '/drivers/chromedriverv52')
 
+Can Change number of weeks to get in advance by changing getNumberOfWeekInAdvance in run.py
