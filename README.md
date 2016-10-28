@@ -1,4 +1,6 @@
 # SussedAddTimeTableToGoogleCalander
+Sorry for crap program structure wrote in anger quickly due to missing a lecture with not been able to view timetable
+
 Adds sussed timetable to your google calander
 
 Need to be run on a linux based system
