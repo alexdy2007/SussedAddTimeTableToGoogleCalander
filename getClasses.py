@@ -89,8 +89,8 @@ class TimeTablePage():
                 class_start_time = table_rows[3].get_attribute('innerHTML')
                 class_end_time = table_rows[4].get_attribute('innerHTML')
                 class_location = table_rows[5].get_attribute('innerHTML')
-                cls = TimeTableClass(class_name, class_start_time, class_end_time, class_location)
-                self.class_list.append(cls)
+                classObject = TimeTableClass(class_name, class_start_time, class_end_time, class_location)
+                self.class_list.append(classObject)
             self.click_next_week()
         return self.class_list
 
